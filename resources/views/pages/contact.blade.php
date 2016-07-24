@@ -35,9 +35,7 @@
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <label>Message</label>
                         <textarea rows="5" class="form-control" placeholder="Message" id="message" name="message" required
-                                  data-validation-required-message="Please enter a message.">
-                        </textarea>
-
+                                  data-validation-required-message="Please enter a message."></textarea>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
