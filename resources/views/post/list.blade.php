@@ -12,7 +12,7 @@
 
             @foreach($posts as $post)
                 <div class="post-preview">
-                    <a href="{{ route('single-post', $post->id) }}">
+                    <a href="{{ route('single-blog', $post->slug) }}">
                         <h2 class="post-title">
                             {{ $post->title }}
                         </h2>
@@ -27,6 +27,10 @@
                 </div>
                 <hr>
                 @endforeach
+
+            <div class="center">
+                {{ $posts->links() }}
+            </div>
         </div>
     </div>
 @stop

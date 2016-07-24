@@ -19,17 +19,20 @@
 
             {!! Form::open(array('route' => 'post.store', 'data-parsley-validate'=>'')) !!}
 
-            {{ Form::label('author', 'Author :') }}
+            {{ Form::label('author', 'Author :', ['class'=>'form-label']) }}
             {{ Form::text('author', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'100')) }}
 
-            {{ Form::label('title', 'Title :') }}
-            {{ Form::text('title', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255')) }}
+            {{ Form::label('title', 'Title :', ['class'=>'form-label']) }}
+            {{ Form::text('title', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255', 'id'=>'title')) }}
 
-            {{ Form::label('subtitle', 'Subtitle :') }}
+            {{ Form::label('subtitle', 'Subtitle :', ['class'=>'form-label']) }}
             {{ Form::text('subtitle', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255')) }}
 
-            {{ Form::label('body', 'Body :') }}
+            {{ Form::label('body', 'Body :', ['class'=>'form-label']) }}
             {{ Form::textarea('body', null, array('id'=>'body-editor','class'=>'form-control', 'required'=>'')) }}
+
+            {{ Form::label('slug', 'Url Slug :', ['class'=>'form-label']) }}
+            {{ Form::text('slug', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255', 'minlength'=>'5', 'id'=>'slug')) }}
 
             {{ Form::submit('Create Post', array('class'=>'btn btn-lg btn-block btn-success', 'style'=>'margin-top:20px')) }}
             {!! Form::close() !!}
@@ -44,6 +47,15 @@
     {!! Html::script('js/parsley.min.js') !!}
     <script>
         CKEDITOR.replace('body-editor');
+
+
+        $(document).ready(function () {
+            $('#title').keyup(function () {
+                var url_slug = $('#title').val().split(' ').join('-').toLowerCase();;
+                $('#slug').val(url_slug);
+            });
+        });
+
     </script>
 
 @stop

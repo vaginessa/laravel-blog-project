@@ -12,7 +12,7 @@
 
             @foreach($posts as $post)
                 <div class="post-preview">
-                    <a href="{{ route('single-post', $post->id) }}">
+                    <a href="{{ route('single-blog', $post->slug) }}">
                         <h2 class="post-title">
                             {{ $post->title }}
                         </h2>
@@ -31,7 +31,7 @@
             <!-- Pager -->
             <ul class="pager">
                 <li class="next">
-                    <a href="{{ route('post.index') }}">Show All &rarr;</a>
+                    <a href="{{ route('blog') }}">Show All &rarr;</a>
                 </li>
             </ul>
         </div>

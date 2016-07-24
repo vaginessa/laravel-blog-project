@@ -17,7 +17,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        $posts = Post::orderBy('created_at', 'desc')->get();
+        $posts = Post::orderBy('created_at', 'desc')->paginate(8);
 
         return view('post.list')->withPosts($posts);
     }
@@ -45,6 +45,7 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
             'body' => 'required',
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug'
         ));
 
         $post = new Post();
@@ -52,6 +53,7 @@ class PostsController extends Controller
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->body = $request->body;
+        $post->slug = $request->slug;
 
         $post->save();
         Session::flash('success', 'The post was successfully saved.');
