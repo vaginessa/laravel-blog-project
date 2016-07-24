@@ -4,7 +4,7 @@
 
 @section('header-image', '/img/home-bg.jpg')
 @section('header-title', 'Create Your Post')
-@section('header-subtitle', 'You only have to write.')
+@section('header-subtitle', 'You just have to write.')
 
 @section('stylesheets')
     {!! Html::style('css/parsley.css') !!}
@@ -43,9 +43,7 @@
 
     {!! Html::script('js/parsley.min.js') !!}
     <script>
-        CKEDITOR.replace('body-editor', {
-            extraPlugins: 'codemirror',
-        });
+        CKEDITOR.replace('body-editor');
     </script>
 
 @stop
