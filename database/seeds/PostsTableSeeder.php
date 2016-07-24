@@ -29,6 +29,7 @@ class PostsTableSeeder extends Seeder
                 'subtitle' => $faker->catchPhrase,
                 'body' => $body,
                 'slug' => $slug,
+                'user_id' => 1,
                 'created_at' => $faker->dateTime($max = 'now'),
                 'updated_at' => $faker->dateTime($max = 'now'),
             ]);

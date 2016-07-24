@@ -22,7 +22,7 @@
                         </h3>
                     </a>
 
-                    <p class="post-meta">Posted by <a href="#">{{ $post->author }}</a>
+                    <p class="post-meta">Posted by <a href="#">{{ $post->user->name }}</a>
                         on {{ date('M j, Y', strtotime($post->created_at)) }}</p>
                 </div>
                 <hr>

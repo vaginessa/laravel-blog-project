@@ -7,7 +7,7 @@
     {{ $post->subtitle }}
 @stop
 @section('post-author')
-    {{ $post->author }}
+    {{ $post->user->name }}
 @stop
 @section('post-date')
     {{ date('M j, Y', strtotime($post->created_at)) }}

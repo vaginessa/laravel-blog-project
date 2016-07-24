@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Post;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class PostsController extends Controller
@@ -46,7 +47,6 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, array(
-            'author' => 'required|max:100',
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
             'body' => 'required',
@@ -54,7 +54,7 @@ class PostsController extends Controller
         ));
 
         $post = new Post();
-        $post->author = $request->author;
+        $post->user_id = Auth::user()->id;
         $post->title = $request->title;
         $post->subtitle = $request->subtitle;
         $post->body = $request->body;

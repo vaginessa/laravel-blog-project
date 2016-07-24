@@ -19,9 +19,6 @@
 
             {!! Form::open(array('route' => 'post.store', 'data-parsley-validate'=>'')) !!}
 
-            {{ Form::label('author', 'Author :', ['class'=>'form-label']) }}
-            {{ Form::text('author', null, array('class'=>'form-control input-lg', 'placeholder'=>'Author', 'required'=>'', 'maxlength'=>'100')) }}
-
             {{ Form::label('title', 'Title :', ['class'=>'form-label']) }}
             {{ Form::text('title', null, array('class'=>'form-control input-lg', 'placeholder'=>'Title',  'required'=>'', 'maxlength'=>'255', 'id'=>'title')) }}
 
