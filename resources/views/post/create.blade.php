@@ -20,19 +20,19 @@
             {!! Form::open(array('route' => 'post.store', 'data-parsley-validate'=>'')) !!}
 
             {{ Form::label('author', 'Author :', ['class'=>'form-label']) }}
-            {{ Form::text('author', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'100')) }}
+            {{ Form::text('author', null, array('class'=>'form-control input-lg', 'placeholder'=>'Author', 'required'=>'', 'maxlength'=>'100')) }}
 
             {{ Form::label('title', 'Title :', ['class'=>'form-label']) }}
-            {{ Form::text('title', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255', 'id'=>'title')) }}
+            {{ Form::text('title', null, array('class'=>'form-control input-lg', 'placeholder'=>'Title',  'required'=>'', 'maxlength'=>'255', 'id'=>'title')) }}
 
             {{ Form::label('subtitle', 'Subtitle :', ['class'=>'form-label']) }}
-            {{ Form::text('subtitle', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255')) }}
+            {{ Form::text('subtitle', null, array('class'=>'form-control input-lg', 'placeholder'=>'Subtitle',  'required'=>'', 'maxlength'=>'255')) }}
 
             {{ Form::label('body', 'Body :', ['class'=>'form-label']) }}
-            {{ Form::textarea('body', null, array('id'=>'body-editor','class'=>'form-control', 'required'=>'')) }}
+            {{ Form::textarea('body', null, array('id'=>'body-editor','class'=>'form-control', 'placeholder'=>'Body', 'required'=>'')) }}
 
             {{ Form::label('slug', 'Url Slug :', ['class'=>'form-label']) }}
-            {{ Form::text('slug', null, array('class'=>'form-control', 'required'=>'', 'maxlength'=>'255', 'minlength'=>'5', 'id'=>'slug')) }}
+            {{ Form::text('slug', null, array('class'=>'form-control input-lg', 'placeholder'=>'Url Slug', 'required'=>'', 'maxlength'=>'255', 'minlength'=>'5', 'id'=>'slug')) }}
 
             {{ Form::submit('Create Post', array('class'=>'btn btn-lg btn-block btn-success', 'style'=>'margin-top:20px')) }}
             {!! Form::close() !!}
