@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main')
 @section('header-image', '/img/post-bg.jpg')
 @section('post-title')
     {{ $post->title }}

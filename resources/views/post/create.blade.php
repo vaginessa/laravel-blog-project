@@ -1,4 +1,4 @@
-@extends('main')
+@extends('layouts.main')
 
 @section('title', '| Create New Post')
 
