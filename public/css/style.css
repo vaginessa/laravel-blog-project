@@ -28,3 +28,11 @@ a:focus {
     text-decoration: none;
     outline: none;
 }
+
+.navbar-nav > li > .dropdown-menu {
+    border-top-left-radius: 2px;
+}
+
+.navbar-nav > li > .dropdown-menu a {
+    padding: 10px 20px;
+}
