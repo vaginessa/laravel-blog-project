@@ -23,3 +23,8 @@ body {
 .highlight-p {
     font-size: 20px;
 }
+
+a:focus {
+    text-decoration: none;
+    outline: none;
+}

@@ -13,7 +13,7 @@ class PostsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => 'index']);
+        $this->middleware('auth');
     }
 
     /**
@@ -21,11 +21,12 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function myPosts()
     {
-        $posts = Post::orderBy('created_at', 'desc')->paginate(8);
+        $user = Auth::user();
+        $posts = Post::orderBy('created_at', 'desc')->where('user_id', $user->id)->paginate(8);
 
-        return view('post.list')->withPosts($posts);
+        return view('post.myposts')->withPosts($posts);
     }
 
     /**
@@ -67,18 +68,6 @@ class PostsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $post = Post::find($id);
-        return view('post.single')->withPost($post);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
@@ -86,7 +75,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('post.edit')->withPost($post);
     }
 
     /**
@@ -98,7 +88,29 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $valArray = array(
+            'title' => 'required|max:255',
+            'subtitle' => 'required|max:255',
+            'body' => 'required'
+        );
+
+        $post = Post::find($id);
+
+        if ($post->slug != $request->slug) {
+            $valArray['slug'] = 'required|alpha_dash|min:5|max:255|unique:posts,slug';
+        }
+
+        $this->validate($request, $valArray);
+
+        $post->title = $request->title;
+        $post->subtitle = $request->subtitle;
+        $post->body = $request->body;
+        $post->slug = $request->slug;
+
+        $post->save();
+        Session::flash('success', 'The post was successfully updated.');
+
+        return redirect()->route('single-blog', $post->slug);
     }
 
     /**
@@ -109,6 +121,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        Session::flash('success', 'The post was successfully deleted.');
+        return redirect()->route('user.posts');
     }
 }
