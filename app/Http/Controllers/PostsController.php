@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Post;
+use App\Category;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -36,7 +37,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return view('post.create');
+        $categories = Category::all();
+        return view('post.create')->withCategories($categories);
     }
 
     /**
@@ -51,7 +53,8 @@ class PostsController extends Controller
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
             'body' => 'required',
-            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug'
+            'slug' => 'required|alpha_dash|min:5|max:255|unique:posts,slug',
+            'category_id' => 'required'
         ));
 
         $post = new Post();
@@ -60,6 +63,7 @@ class PostsController extends Controller
         $post->subtitle = $request->subtitle;
         $post->body = $request->body;
         $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
 
         $post->save();
         Session::flash('success', 'The post was successfully saved.');
@@ -76,7 +80,8 @@ class PostsController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        return view('post.edit')->withPost($post);
+        $categories = Category::all();
+        return view('post.edit')->withPost($post)->withCategories($categories);
     }
 
     /**
@@ -91,7 +96,8 @@ class PostsController extends Controller
         $valArray = array(
             'title' => 'required|max:255',
             'subtitle' => 'required|max:255',
-            'body' => 'required'
+            'body' => 'required',
+            'category_id' => 'required'
         );
 
         $post = Post::find($id);
@@ -106,6 +112,7 @@ class PostsController extends Controller
         $post->subtitle = $request->subtitle;
         $post->body = $request->body;
         $post->slug = $request->slug;
+        $post->category_id = $request->category_id;
 
         $post->save();
         Session::flash('success', 'The post was successfully updated.');

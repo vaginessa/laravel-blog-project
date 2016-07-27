@@ -3,6 +3,9 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 
+use App\Category;
+use App\User;
+
 class PostsTableSeeder extends Seeder
 {
     /**
@@ -14,7 +17,7 @@ class PostsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        foreach (range(1, 10) as $index) {
+        foreach (range(1, 20) as $index) {
 
             $body = '';
             foreach ($faker->paragraphs(3, false) as $paragraph) {
@@ -24,12 +27,16 @@ class PostsTableSeeder extends Seeder
             $title = $faker->unique()->catchPhrase;
             $slug = str_replace(' ', '-', $title);
 
+            $user = User::all()->random(1);
+            $category = Category::all()->random(1);
+
             DB::table('posts')->insert([
                 'title' => $title,
                 'subtitle' => $faker->catchPhrase,
                 'body' => $body,
                 'slug' => $slug,
-                'user_id' => 1,
+                'category_id' => $category->id,
+                'user_id' => $user->id,
                 'created_at' => $faker->dateTime($max = 'now'),
                 'updated_at' => $faker->dateTime($max = 'now'),
             ]);

@@ -15,7 +15,8 @@ class BlogController extends Controller
         return view('post.single')->withPost($post);
     }
 
-    public function getList() {
+    public function getList()
+    {
         $posts = Post::orderBy('created_at', 'desc')->paginate(8);
         return view('post.list')->withPosts($posts);
     }

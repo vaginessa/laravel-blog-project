@@ -35,6 +35,15 @@
                 {{ Form::text('slug', null, array('class'=>'form-control input-lg', 'placeholder'=>'Url Slug', 'required'=>'', 'maxlength'=>'255', 'minlength'=>'5', 'id'=>'slug')) }}
             </div>
 
+            <div class="form-group">
+                {{ Form::label('category_id', 'Category :', ['class'=>'form-label']) }}
+                <select class="form-control input-lg" name="category_id" id="category_id" required>
+                    @foreach($categories as $categ)
+                        <option value="{{ $categ->id }}">{{ $categ->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             {{ Form::submit('Create Post', array('class'=>'btn btn-lg btn-block btn-success', 'style'=>'margin-top:20px')) }}
             {!! Form::close() !!}
 
@@ -55,6 +64,12 @@
                 var url_slug = $('#title').val().split(' ').join('-').toLowerCase();
                 ;
                 $('#slug').val(url_slug);
+            });
+
+            $( "#category_id" ).select2({
+                theme: "bootstrap",
+                placeholder: "Select a category",
+                containerCssClass : "input-lg"
             });
         });
 
