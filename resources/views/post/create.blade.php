@@ -8,6 +8,25 @@
 
 @section('stylesheets')
     {!! Html::style('css/parsley.css') !!}
+    {!! Html::style('css/bootstrap-tagsinput.css') !!}
+
+    <style>
+        .bootstrap-tagsinput {
+            line-height: 30px;
+            width: 100% !important;
+            display: block;
+        }
+
+        .bootstrap-tagsinput input {
+            height: 46px;
+            padding: 10px 16px;
+            font-size: 18px;
+        }
+
+        .bootstrap-tagsinput .tag {
+            margin: 3px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -17,7 +36,7 @@
             <h1>Create New Post</h1>
             <hr>
 
-            {!! Form::open(array('route' => 'post.store', 'data-parsley-validate'=>'')) !!}
+            {!! Form::open(array('route' => 'post.store', 'data-parsley-validate'=>'', 'id'=>'creation-form')) !!}
             <div class="form-group">
                 {{ Form::label('title', 'Title :', ['class'=>'form-label']) }}
                 {{ Form::text('title', null, array('class'=>'form-control input-lg', 'placeholder'=>'Title',  'required'=>'', 'maxlength'=>'255', 'id'=>'title')) }}
@@ -44,6 +63,11 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                {{ Form::label('tags', 'Tags :', ['class'=>'form-label']) }}
+                <input class="form-control input-lg" type="text" id="tags"/>
+            </div>
+
             {{ Form::submit('Create Post', array('class'=>'btn btn-lg btn-block btn-success', 'style'=>'margin-top:20px')) }}
             {!! Form::close() !!}
 
@@ -55,6 +79,7 @@
 @section('scripts')
 
     {!! Html::script('js/parsley.min.js') !!}
+    {!! Html::script('js/bootstrap-tagsinput.min.js') !!}
     <script>
         CKEDITOR.replace('body-editor');
 
@@ -66,10 +91,28 @@
                 $('#slug').val(url_slug);
             });
 
-            $( "#category_id" ).select2({
+            $("#category_id").select2({
                 theme: "bootstrap",
                 placeholder: "Select a category",
-                containerCssClass : "input-lg"
+                containerCssClass: "input-lg"
+            });
+
+            $('#tags').tagsinput({
+                maxTags: 10,
+                minChars: 5,
+                trimValue: true,
+                allowDuplicates: false,
+                onTagExists: function (item, $tag) {
+                    $tag.hide().fadeIn();
+                }
+            });
+
+            $('#creation-form').on('keyup keypress', function (e) {
+                var keyCode = e.keyCode || e.which;
+                if (keyCode === 13) {
+                    e.preventDefault();
+                    return false;
+                }
             });
         });
 

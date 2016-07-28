@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Post;
 use App\Category;
+use App\Tag;
 use Illuminate\Support\Facades\Auth;
 use Session;
 
@@ -64,6 +65,18 @@ class PostsController extends Controller
         $post->body = $request->body;
         $post->slug = $request->slug;
         $post->category_id = $request->category_id;
+
+        $tags = $request->tags;
+        $tags = explode(',', $tags);
+
+        //get all existed tags
+        //tags that have not their name inside $tags delete
+        //unset $tags that have their name
+        //add news
+
+        //TODO
+        foreach ($tags as $tag) {
+        }
 
         $post->save();
         Session::flash('success', 'The post was successfully saved.');
