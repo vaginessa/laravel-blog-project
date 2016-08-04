@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', '| Welcome')
+@section('title', '| Blog')
 
 @section('header-image', '/img/home-bg.jpg')
 @section('header-title', 'Blog Posts')

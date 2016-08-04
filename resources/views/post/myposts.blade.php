@@ -10,6 +10,11 @@
     <div class="row">
         <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 
+            @if(count($posts) == 0)
+                <p class="text-center">There are no posts.</p>
+            @endif
+
+
             @foreach($posts as $post)
                 <div class="post-preview">
                     <div class="col-sm-10">
