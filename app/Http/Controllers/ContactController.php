@@ -2,34 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Request;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Session;
 
 class ContactController extends Controller
 {
 
-    public function contact()
+    public function getContact()
     {
         return view('pages.contact');
     }
 
-    public function sendMail(Request $request)
+    public function postContact(Request $request)
     {
         $this->validate($request, array(
             'name' => 'required|max:100',
-            'email' => 'required',
-            'message' => 'required',
+            'email' => 'required|email|min:3',
+            'message' => 'required|min:10',
         ));
-        $name = strip_tags(htmlspecialchars($request->name));
-        $email = strip_tags(htmlspecialchars($request->email));
-        $message = strip_tags(htmlspecialchars($request->message));
 
-        // Create the email and send the message
-        $to = 'a.afmeti@bluehat.al';
-        $email_subject = "Website Contact From:  $name";
-        $email_body = "You have received a new message from your website contact form.\n\n" . "Here are the details:\n\nName: $name\n\nEmail: $email\n\nMessage:\n$message";
-        $headers = "From: a.afmeti@bluehat.al\n";
-        $headers .= "Reply-To: $email";
-        mail($to, $email_subject, $email_body, $headers);
+        $data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+            'bodyMessage' => $request->message
+        );
+        Mail::send('emails.contact', $data, function ($message) use ($data) {
+            $message->from($data['email'], $data['name']);
+            $message->to('a.afmeti@techalin.com');
+            $message->subject("New Message @ InTirana.com");
+            $message->replyTo($data['email']);
+        });
+
         Session::flash('success', 'The message was successfully sent.');
 
         return redirect()->route('contact');

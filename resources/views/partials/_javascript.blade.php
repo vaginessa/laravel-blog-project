@@ -7,7 +7,6 @@
 
 {{ Html::script('libs/ckeditor/ckeditor.js') }}
 {{ Html::script('js/jqBootstrapValidation.js') }}
-{{ Html::script('js/contact-me.js') }}
 {{ Html::script('js/your-blog.min.js') }}
 {{ Html::script('js/script.js') }}
 {{ Html::script('js/select2.full.min.js') }}
