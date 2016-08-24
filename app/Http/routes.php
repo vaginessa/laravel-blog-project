@@ -22,6 +22,8 @@ Route::group(['middleware' => 'web'], function () {
 
 
 Route::group(['prefix' => 'api/v1'], function () {
+
+    Route::post('contact', 'Api\ContactController@contact');
     Route::get('post/categories', 'Api\PostsController@getCategories');
 
     Route::resource('post', 'Api\PostsController',
