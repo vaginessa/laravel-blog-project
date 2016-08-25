@@ -25,6 +25,14 @@
                                 </span>
                 </a>
             </li>
+            <li>
+                <a href="{{ URL::asset('files/YourBlog.apk') }}" title="Download Android App.">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-android fa-stack-1x fa-inverse"></i>
+                                </span>
+                </a>
+            </li>
         </ul>
         <p class="copyright text-muted">Copyright &copy; Alban Afmeti 2016</p>
     </div>
